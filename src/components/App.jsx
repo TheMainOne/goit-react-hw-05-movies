@@ -1,6 +1,19 @@
 import React from 'react';
-// const KEY = '3f98aefed4f412e17fc5cbf8a78c872a';
+import { Routes, Route } from 'react-router-dom';
+import Navigation from './Navigation/Navigation';
+import {
+  fetchTrendingMovies,
+  fetchMovieByQuery,
+  fetchDetailMovieInfo,
+} from 'services/fetchMovies';
 
 export const App = () => {
-  return <>React homework template</>;
+  return (
+    <header>
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<h1>Hello world</h1>} />
+      </Routes>
+    </header>
+  );
 };
