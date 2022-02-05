@@ -1,18 +1,30 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navigation from './Navigation/Navigation';
-import {
-  fetchTrendingMovies,
-  fetchMovieByQuery,
-  fetchDetailMovieInfo,
-} from 'services/fetchMovies';
+import HomePage from './HomePage/HomePage';
+import { fetchTrendingMovies } from 'services/fetchMovies';
 
 export const App = () => {
+  const [trendingMovies, setTrendingMovies] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchTrendingMovies()
+      .then(movies => setTrendingMovies(movies))
+      .catch(error => setError(error));
+  }, []);
+
   return (
     <header>
       <Navigation />
       <Routes>
-        <Route path="/" element={<h1>Hello world</h1>} />
+        <Route
+          path="/"
+          element={
+            <HomePage errorMessage={error} trendingMovies={trendingMovies} />
+          }
+        />
+        <Route path="/movies" element={<h1>Please enjoy our movies</h1>} />
       </Routes>
     </header>
   );
