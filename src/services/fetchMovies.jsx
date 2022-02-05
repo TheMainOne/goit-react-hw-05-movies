@@ -19,6 +19,7 @@ export function fetchMovieByQuery(searchQuery) {
   );
 }
 
-export function fetchDetailMovieInfo(movieId) {
-  return fetchMoviesWithErrorHandling(`/movie/${movieId}?api_key=${KEY}`);
+export async function fetchMovieById(movieId) {
+  const item = await axios.get(`/movie/${movieId}?api_key=${KEY}`);
+  return item.data;
 }
