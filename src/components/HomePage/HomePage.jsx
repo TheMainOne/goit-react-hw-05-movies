@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 const HomePage = ({ errorMessage, trendingMovies }) => {
   console.log(errorMessage);
   console.log(trendingMovies);
