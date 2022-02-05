@@ -1,4 +1,5 @@
 const HomePage = ({ errorMessage, trendingMovies }) => {
+  console.log(trendingMovies);
   return (
     <>
       <h1>Trending today</h1>
