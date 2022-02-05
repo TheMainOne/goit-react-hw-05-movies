@@ -16,15 +16,16 @@ export const App = () => {
 
   return (
     <header>
-      <Navigation />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <HomePage errorMessage={error} trendingMovies={trendingMovies} />
-          }
-        />
-        <Route path="/movies" element={<h1>Please enjoy our movies</h1>} />
+        <Route path="/" element={<Navigation />}>
+          <Route
+            path="homepage"
+            element={
+              <HomePage errorMessage={error} trendingMovies={trendingMovies} />
+            }
+          />
+          <Route path="movies" element={<h1>Please enjoy our movies</h1>} />
+        </Route>
       </Routes>
     </header>
   );
