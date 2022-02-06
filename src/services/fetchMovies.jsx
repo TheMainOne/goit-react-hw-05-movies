@@ -15,7 +15,7 @@ export function fetchTrendingMovies() {
 
 export function fetchMovieByQuery(searchQuery) {
   return fetchMoviesWithErrorHandling(
-    `/search/movie?api_key=${KEY}&query=${searchQuery}&page=1`
+    `/search/movie?api_key=${KEY}&query=${searchQuery}`
   );
 }
 
