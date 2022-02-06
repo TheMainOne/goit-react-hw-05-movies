@@ -13,6 +13,7 @@ const MoviesPage = () => {
       fetchMovieByQuery(inputValue)
         .then(movies => setMovies(movies))
         .catch(error => {
+          console.log(error);
           toast.error('Sorry. Movie is not found');
         })
         .finally(setInputValue(''));
@@ -26,6 +27,12 @@ const MoviesPage = () => {
           event.preventDefault();
           const form = event.target;
           const value = event.target.searchField.value;
+
+          if (value === '') {
+            toast.error('Please enter a search query');
+            return;
+          }
+
           setInputValue(value);
           form.reset();
         }}
@@ -38,6 +45,7 @@ const MoviesPage = () => {
       <div>
         {movies && (
           <ul>
+            {movies.length === 0 ? <p>Sorry. Movie is not found</p> : null}
             {movies.map(movie => (
               <li key={movie.id}>
                 <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>

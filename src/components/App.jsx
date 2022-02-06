@@ -1,21 +1,28 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-import Navigation from './Navigation/Navigation';
-import HomePage from './HomePage/HomePage';
-import MoviesPage from './MoviesPage/MoviesPage';
-import ItemPage from './pages/MovieDetailsPage';
+import styled from 'styled-components';
+import { NavLink, Outlet } from 'react-router-dom';
+
+const Nav = styled.nav`
+  display: flex;
+  gap: 10px;
+`;
+
+const Link = styled(NavLink)`
+  &.active {
+    color: tomato;
+  }
+`;
 
 export const App = () => {
   return (
-    <header>
-      <Navigation />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/movies" element={<MoviesPage />} />
-        <Route path="/movies/:itemId" element={<ItemPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-      <Toaster />
-    </header>
+    <>
+      <header>
+        <Nav>
+          <Link to="/">Home</Link>
+          <Link to="/movies">Movies</Link>
+        </Nav>
+        <hr />
+      </header>
+      <Outlet />
+    </>
   );
 };
