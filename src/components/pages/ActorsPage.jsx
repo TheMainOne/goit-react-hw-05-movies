@@ -9,12 +9,12 @@ const ActorsInfo = () => {
   useEffect(() => {
     fetchMovieActors(movieId).then(actors => setActors(actors));
   }, [movieId]);
-  console.log(actors);
+
   return (
     <>
       {actors &&
         actors.map(actor => (
-          <article>
+          <article key={actor.id}>
             <img
               src={`https://image.tmdb.org/t/p/w342${actor.profile_path}`}
               alt=""

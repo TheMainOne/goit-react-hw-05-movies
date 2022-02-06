@@ -6,6 +6,7 @@ import MoviesPage from './components/MoviesPage/MoviesPage';
 import ItemPage from './components/pages/MovieDetailsPage';
 import HomePage from './components/HomePage/HomePage';
 import ActorsInfo from './components/pages/ActorsPage';
+import ReviewesInfo from './components/pages/ReviewsPage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,7 +17,7 @@ ReactDOM.render(
           <Route path="movies" element={<MoviesPage />} />
           <Route path="movies/:movieId" element={<ItemPage />}>
             <Route path="cast" element={<ActorsInfo />} />
-            <Route path="reviews" element={<div>Reviews</div>} />
+            <Route path="reviews" element={<ReviewesInfo />} />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
