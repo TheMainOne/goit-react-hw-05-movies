@@ -4,17 +4,17 @@ import { fetchTrendingMovies } from 'services/fetchMovies';
 
 const HomePage = () => {
   const [trendingMovies, setTrendingMovies] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setIsLoading(true);
+    setLoading(true);
     try {
       fetchTrendingMovies().then(movies => setTrendingMovies(movies));
     } catch (error) {
       setError(error);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   }, []);
 
@@ -22,8 +22,8 @@ const HomePage = () => {
     <>
       <h1>Trending today</h1>
       <main>
-        {isLoading === true ? <p>Loading...</p> : null}
         <ul>
+          {loading && <p>Loading...</p>}
           {trendingMovies &&
             trendingMovies.map(movie => (
               <li key={movie.id}>
