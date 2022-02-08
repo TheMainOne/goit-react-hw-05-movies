@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieActors } from 'services/fetchMovies';
+import { Gallery, GalleryItem, Text } from './ActorsPageStyled';
 
 const ActorsInfo = () => {
   const { movieId } = useParams();
@@ -11,19 +12,19 @@ const ActorsInfo = () => {
   }, [movieId]);
 
   return (
-    <>
+    <Gallery>
       {actors &&
         actors.map(actor => (
-          <article key={actor.id}>
+          <GalleryItem key={actor.id}>
             <img
               src={`https://image.tmdb.org/t/p/w342${actor.profile_path}`}
               alt=""
             />
-            <p>{actor.original_name}</p>
-            <p>{actor.character}</p>
-          </article>
+            <Text>{actor.original_name}</Text>
+            <Text>{actor.character}</Text>
+          </GalleryItem>
         ))}
-    </>
+    </Gallery>
   );
 };
 export default ActorsInfo;

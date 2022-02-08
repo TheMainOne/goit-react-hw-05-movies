@@ -1,12 +1,15 @@
-import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { fetchMovieByQuery } from 'services/fetchMovies';
-import { Wrapper, Button, Input } from './MoviesPage.styled';
+import { Wrapper, Button, Input, ListItem } from './MoviesPage.styled';
 
 const MoviesPage = () => {
+  const location = useLocation();
   const [inputValue, setInputValue] = useState('');
   const [movies, setMovies] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query');
 
   useEffect(() => {
     if (inputValue) {
@@ -17,12 +20,20 @@ const MoviesPage = () => {
           toast.error('Sorry. Movie is not found');
         })
         .finally(setInputValue(''));
+    } else if (query) {
+      fetchMovieByQuery(query)
+        .then(movies => setMovies(movies))
+        .catch(error => {
+          console.log(error);
+          toast.error('Sorry. Movie is not found');
+        });
     }
-  }, [inputValue]);
+  }, [inputValue, query]);
 
   return (
     <>
       <form
+        autoComplete="off"
         onSubmit={event => {
           event.preventDefault();
           const form = event.target;
@@ -34,6 +45,7 @@ const MoviesPage = () => {
           }
 
           setInputValue(value);
+          setSearchParams({ query: value });
           form.reset();
         }}
       >
@@ -41,6 +53,7 @@ const MoviesPage = () => {
           <Wrapper>
             <Input type="text" name="searchField" />
             <Button type="submit">Search</Button>
+            <Toaster />
           </Wrapper>
         </label>
       </form>
@@ -49,9 +62,11 @@ const MoviesPage = () => {
           <ul>
             {movies.length === 0 ? <p>Sorry. Movie is not found</p> : null}
             {movies.map(movie => (
-              <li key={movie.id}>
-                <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
-              </li>
+              <ListItem key={movie.id}>
+                <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+                  {movie.original_title}
+                </Link>
+              </ListItem>
             ))}
           </ul>
         )}

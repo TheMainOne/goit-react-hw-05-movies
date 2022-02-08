@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
+  margin-bottom: 20px;
 `;
 
 export const Button = styled.button`
@@ -36,4 +37,12 @@ export const Input = styled.input`
   border-bottom-right-radius: 0;
   position: relative;
   z-index: 2;
+`;
+
+export const ListItem = styled.li`
+  padding: 5px;
+
+  &:nth-child(even) {
+    background-color: #d6d6d6;
+  }
 `;

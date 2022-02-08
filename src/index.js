@@ -4,13 +4,9 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { App } from 'components/App/App';
 
 const MoviesPage = lazy(() => import('./components/MoviesPage/MoviesPage'));
-
 const ItemPage = lazy(() => import('./components/pages/MovieDetailsPage'));
-
 const HomePage = lazy(() => import('./components/HomePage/HomePage'));
-
 const ActorsInfo = lazy(() => import('./components/pages/ActorsPage'));
-
 const ReviewsInfo = lazy(() => import('./components/pages/ReviewsPage'));
 
 ReactDOM.render(
