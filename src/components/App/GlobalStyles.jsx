@@ -11,8 +11,8 @@ body {
   font-style: normal;
   font-size: 16px;
   letter-spacing: 0.03em;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #f7f7f7;
+  color: #545454;
 }
 
 h1,

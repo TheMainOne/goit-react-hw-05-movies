@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchTrendingMovies } from 'services/fetchMovies';
+import { Title, ListItem } from './HomePage.styled';
 
 const HomePage = () => {
   const [trendingMovies, setTrendingMovies] = useState(null);
@@ -20,15 +21,15 @@ const HomePage = () => {
 
   return (
     <>
-      <h1>Trending today</h1>
       <main>
+        <Title>Trending today</Title>
         <ul>
           {loading && <p>Loading...</p>}
           {trendingMovies &&
             trendingMovies.map(movie => (
-              <li key={movie.id}>
+              <ListItem key={movie.id}>
                 <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
-              </li>
+              </ListItem>
             ))}
           {error && <h2>Error. Something went wrong</h2>}
         </ul>
