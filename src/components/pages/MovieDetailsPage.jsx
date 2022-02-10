@@ -50,6 +50,7 @@ const AdditionalLink = styled(NavLink)`
 
 const ItemPage = () => {
   const location = useLocation();
+  const path = location.state;
   const { movieId } = useParams();
   const [item, setItem] = useState(null);
   const [error, setError] = useState(false);
@@ -66,13 +67,17 @@ const ItemPage = () => {
         toast.error('Sorry. Movie is not found');
       });
   }, [movieId]);
+  console.log(path);
 
   return (
     <>
       <div>
-        <GoBackButton to={location?.state?.from ?? '/movies'}>
-          Go back
-        </GoBackButton>
+        {path && (
+          <GoBackButton to={path.from.pathname === '/' ? '/' : '/movies'}>
+            Go back
+          </GoBackButton>
+        )}
+        {!path && <GoBackButton to={'/'}>Go back</GoBackButton>}
         {error && <p>Something went wrong. Please try again later</p>}
         {item && (
           <Wrapper>

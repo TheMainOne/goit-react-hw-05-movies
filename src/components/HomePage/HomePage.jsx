@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { fetchTrendingMovies } from 'services/fetchMovies';
 import { Title, ListItem } from './HomePage.styled';
 
 const HomePage = () => {
+  const location = useLocation();
   const [trendingMovies, setTrendingMovies] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,7 +29,9 @@ const HomePage = () => {
           {trendingMovies &&
             trendingMovies.map(movie => (
               <ListItem key={movie.id}>
-                <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
+                <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+                  {movie.original_title}
+                </Link>
               </ListItem>
             ))}
           {error && <h2>Error. Something went wrong</h2>}
