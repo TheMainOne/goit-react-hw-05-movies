@@ -35,7 +35,6 @@ ol {
 
 img {
   display: block;
-  height: auto;
 }
 
 a {
