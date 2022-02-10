@@ -67,7 +67,6 @@ const ItemPage = () => {
         toast.error('Sorry. Movie is not found');
       });
   }, [movieId]);
-  console.log(path);
 
   return (
     <>
