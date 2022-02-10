@@ -11,7 +11,7 @@ const ReviewsInfo = lazy(() => import('./components/pages/ReviewsPage'));
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename="goit-react-hw-05-movies">
+    <BrowserRouter>
       <Suspense fallback="">
         <Routes>
           <Route path="/" element={<App />}>

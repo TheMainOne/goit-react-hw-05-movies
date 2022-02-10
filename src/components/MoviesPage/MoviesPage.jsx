@@ -6,29 +6,21 @@ import { Wrapper, Button, Input, ListItem } from './MoviesPage.styled';
 
 const MoviesPage = () => {
   const location = useLocation();
-  const [inputValue, setInputValue] = useState('');
   const [movies, setMovies] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query');
 
   useEffect(() => {
-    if (inputValue) {
-      fetchMovieByQuery(inputValue)
-        .then(movies => setMovies(movies))
-        .catch(error => {
-          console.log(error);
-          toast.error('Sorry. Movie is not found');
-        })
-        .finally(setInputValue(''));
-    } else if (query) {
+    if (query) {
       fetchMovieByQuery(query)
         .then(movies => setMovies(movies))
         .catch(error => {
           console.log(error);
           toast.error('Sorry. Movie is not found');
         });
+      return;
     }
-  }, [inputValue, query]);
+  }, [query]);
 
   return (
     <>
@@ -44,7 +36,6 @@ const MoviesPage = () => {
             return;
           }
 
-          setInputValue(value);
           setSearchParams({ query: value });
           form.reset();
         }}
