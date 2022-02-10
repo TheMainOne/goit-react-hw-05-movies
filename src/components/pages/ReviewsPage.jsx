@@ -17,6 +17,7 @@ const ReviewsInfo = () => {
 
   return (
     <>
+      {!reviews && <p>We don't have any reviews for this movie.</p>}
       {reviews &&
         reviews.map(review => (
           <ul key={review.id}>
