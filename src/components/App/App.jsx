@@ -1,29 +1,13 @@
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
-import { Nav, Link, Container, Header } from './App.styled';
 import GlobalStyle from './GlobalStyles';
+import { SiteHeader } from 'components/SiteHeader/SiteHeader';
 
 const MoviesPage = lazy(() => import('../MoviesPage/MoviesPage'));
 const ItemPage = lazy(() => import('../pages/MovieDetailsPage'));
 const HomePage = lazy(() => import('../HomePage/HomePage'));
 const ActorsInfo = lazy(() => import('../pages/ActorsPage'));
 const ReviewsInfo = lazy(() => import('../pages/ReviewsPage'));
-
-const SiteHeader = () => {
-  return (
-    <Container>
-      <Header>
-        <Nav>
-          <Link to="/">Home</Link>
-          <Link to="/movies">Movies</Link>
-        </Nav>
-        <hr />
-      </Header>
-      <Outlet />
-    </Container>
-  );
-};
 
 const App = () => {
   return (
