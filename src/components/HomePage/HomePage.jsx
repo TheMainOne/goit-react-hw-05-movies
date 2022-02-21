@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { fetchTrendingMovies } from 'services/fetchMovies';
-import { Title, ListItem } from './HomePage.styled';
+import {
+  Title,
+  ListWrapper,
+  List,
+  MovieTitleWrapper,
+  Image,
+  ListItem,
+} from './HomePage.styled';
 
 const HomePage = () => {
   const location = useLocation();
@@ -24,18 +31,26 @@ const HomePage = () => {
     <>
       <main>
         <Title>Trending today</Title>
-        <ul>
+        <List>
           {loading && <p>Loading...</p>}
           {trendingMovies &&
             trendingMovies.map(movie => (
               <ListItem key={movie.id}>
                 <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-                  {movie.original_title}
+                  <ListWrapper>
+                    <Image
+                      alt={movie.original_title}
+                      src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
+                    />
+                    <MovieTitleWrapper>
+                      {movie.original_title}
+                    </MovieTitleWrapper>
+                  </ListWrapper>
                 </Link>
               </ListItem>
             ))}
           {error && <h2>Error. Something went wrong</h2>}
-        </ul>
+        </List>
       </main>
     </>
   );
